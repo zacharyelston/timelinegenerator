@@ -1,0 +1,149 @@
+version: 1.0
+title: "Timeline Generator Go Conversion Tasks"
+description: "Todo list for converting TimelineGenerator from C# to Go"
+
+tasks:
+  - category: "Project Setup"
+    items:
+      - title: "Create basic Go project structure"
+        description: |
+          Set up directory layout following Go best practices:
+          - cmd/ for command implementations
+          - internal/ for private packages
+          - pkg/ for public packages
+          - docs/ for documentation
+          - examples/ for example files
+      - title: "Set up Go modules"
+        description: |
+          - Initialize go.mod
+          - Add core dependencies:
+            - cobra for CLI
+            - viper for configuration
+            - yaml.v3 for YAML processing
+            - blackfriday/v2 for markdown
+            - fatih/color for console output
+      - title: "Configure development tools"
+        description: |
+          - Set up golangci-lint
+          - Configure gofmt
+          - Add .editorconfig
+          - Create Makefile for common tasks
+      - title: "Implement configuration system"
+        description: |
+          - Set up Viper for config management
+          - Define configuration file structure
+          - Add environment variable support
+          - Implement config validation
+      - title: "Create project documentation"
+        description: |
+          - Write contributing guidelines
+          - Add code of conduct
+          - Create changelog
+          - Document development setup
+
+  - category: "Core Implementation"
+    items:
+      - title: "Implement YAML parsing"
+        description: |
+          - Create Timeline and Event models
+          - Implement YAML importer
+          - Add validation for required fields
+          - Handle date parsing
+      - title: "Create exporter interface"
+        description: |
+          - Define Exporter interface
+          - Create factory for exporters
+          - Add error handling
+      - title: "Implement TimelineJS exporter"
+        description: |
+          - Create HTML template
+          - Handle date formatting
+          - Support all timeline features
+          - Add media support
+      - title: "Implement Vis.js exporter"
+        description: |
+          - Create HTML template
+          - Handle date ranges
+          - Support grouping
+          - Add styling
+      - title: "Implement Mermaid exporter"
+        description: |
+          - Create markdown template
+          - Handle date formatting
+          - Support sections
+          - Add documentation
+      - title: "Implement Bootstrap exporter"
+        description: |
+          - Create HTML template
+          - Add responsive design
+          - Support all features
+          - Handle markdown conversion
+
+  - category: "CLI Features"
+    items:
+      - title: "Implement sample command"
+        description: |
+          - Create sample timeline
+          - Add example events
+          - Include all features
+          - Add documentation
+      - title: "Implement generate command"
+        description: |
+          - Add exporter selection
+          - Handle input/output paths
+          - Support all flags
+          - Add progress feedback
+      - title: "Add filtering capabilities"
+        description: |
+          - Implement date filtering
+          - Add tag filtering
+          - Support category filtering
+          - Handle multiple filters
+
+  - category: "Testing & Quality"
+    items:
+      - title: "Add unit tests"
+        description: |
+          - Test YAML parsing
+          - Test exporters
+          - Test filtering
+          - Add test coverage
+      - title: "Add integration tests"
+        description: |
+          - Test CLI commands
+          - Test file generation
+          - Test configuration
+          - Add example tests
+      - title: "Implement error handling"
+        description: |
+          - Add error types
+          - Improve error messages
+          - Add validation
+          - Handle edge cases
+      - title: "Add benchmarks"
+        description: |
+          - Benchmark YAML parsing
+          - Test large timelines
+          - Compare exporters
+          - Document results
+
+  - category: "Release"
+    items:
+      - title: "Set up CI/CD"
+        description: |
+          - Configure GitHub Actions
+          - Add release workflow
+          - Set up testing
+          - Add linting
+      - title: "Create release process"
+        description: |
+          - Add version management
+          - Create release notes
+          - Build binaries
+          - Update documentation
+      - title: "Package management"
+        description: |
+          - Add to pkg.go.dev
+          - Create installation docs
+          - Add usage examples
+          - Update README

@@ -1,68 +1,28 @@
-# Create new tag
-# git tag v0.0.1
-# git push --tags
-
-name: Release on publish
+name: Release
 
 on:
-  release:
-    types: [published]
-
-env:
-  DOTNET_VERSION: '8.0.x'
+  push:
+    tags:
+      - 'v*'
 
 jobs:
-  release:
+  goreleaser:
     name: Release
-    
-    strategy:
-      matrix:
-        kind: ['linux', 'windows']
-        include:
-          - kind: linux
-            os: ubuntu-latest
-            target: linux-x64
-          - kind: windows
-            os: windows-latest
-            target: win-x64
-    runs-on: ${{ matrix.os }}
-
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-  
-      # Install the .NET Core workload
-      - name: Install .NET Core
-        uses: actions/setup-dotnet@v4
+          
+      - name: Set up Go
+        uses: actions/setup-go@v5
         with:
-            dotnet-version: ${{ env.DOTNET_VERSION }}
-
-      - name: Build
-        shell: bash
-        run: |
-          tag=$(git describe --tags --abbrev=0)
-          release_name="timelinegenerator-$tag-${{ matrix.target }}"
-
-          # Build everything
-          dotnet publish --framework net8.0 --runtime "${{ matrix.target }}" -c Release --property:PublishDir="$release_name"
-
-          # Pack files
-          if [ "${{ matrix.target }}" == "win-x64" ]; then
-            7z a -tzip "$release_name.zip" "./$release_name/*"
-          else
-            tar czvf "$release_name.tar.gz" -C "./$release_name" .             
-          fi
-
-          # Delete output directory
-          rm -r "./$release_name"
-
-      - name: Publish
-        uses: softprops/action-gh-release@v1
+          go-version: '1.22'
+          
+      - name: Run GoReleaser
+        uses: goreleaser/goreleaser-action@v5
         with:
-          files: "timelinegenerator*"
+          version: latest
+          args: release --clean
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-# Reference: https://www.newline.co/@krishna/release-management-with-aspnet-core-and-github-actions--ff31a146
