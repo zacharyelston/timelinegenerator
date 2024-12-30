@@ -93,7 +93,7 @@ namespace TimelineGenerator.Exporter
         private static void WriteFooter(StreamWriter writer)
         {
             writer.WriteLine();
-            writer.WriteLine("Generated using [TimelineGenerator](https://github.com/spech66/timelinegenerator).");
+            writer.WriteLine("Generated using [TimelineGenerator](https://github.com/zacharyelston/timelinegenerator).");
         }
 
         private object Escape(string title)
